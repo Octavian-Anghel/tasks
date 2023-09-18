@@ -102,7 +102,7 @@ export function makeMath(addends: number[]): string {
         (currentTotal: number, num: number) => currentTotal + num,
         0
     );
-    const strRep = `${sum}=${addends.join("+")}`;
+    const strRep = `${sum}=${addends.length === 0 ? "0" : addends.join("+")}`;
     return strRep;
 }
 
@@ -116,5 +116,22 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let negativeNumberIndex = -1;
+    let sumToInsert = 0;
+    let result = values.map((value: number, index: number) => {
+        if (value < 0 && negativeNumberIndex === -1) {
+            negativeNumberIndex = index;
+        } else if (negativeNumberIndex === -1) {
+            sumToInsert += value;
+        }
+        return value;
+    });
+
+    if (values.length > 0 && negativeNumberIndex === -1) {
+        result.push(sumToInsert);
+    } else {
+        result.splice(negativeNumberIndex + 1, 0, sumToInsert);
+    }
+
+    return result;
 }
