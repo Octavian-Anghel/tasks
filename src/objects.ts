@@ -85,7 +85,7 @@ export function toShortForm(question: Question): string {
 export function toMarkdown(question: Question): string {
     let result = "";
 
-    result += `${question.name}\n`;
+    result += `# ${question.name}\n`;
     result += `${question.body}\n`;
 
     if (question.type === "multiple_choice_question") {
@@ -93,7 +93,7 @@ export function toMarkdown(question: Question): string {
             result += `- ${option}\n`;
         }
     }
-    return result;
+    return result.trim();
 }
 
 /**
