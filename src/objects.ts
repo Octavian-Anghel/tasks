@@ -62,7 +62,7 @@ export function toShortForm(question: Question): string {
         question.name.length > 10
             ? question.name.substring(0, 10)
             : question.name;
-    return "${stringId}: ${shortenedQuestion}";
+    return `${stringId}: ${shortenedQuestion}`;
 }
 
 /**
@@ -85,8 +85,8 @@ export function toShortForm(question: Question): string {
 export function toMarkdown(question: Question): string {
     let result = "";
 
-    result += "${question.name}\n";
-    result += "${question.body}\n";
+    result += `${question.name}\n`;
+    result += `${question.body}\n`;
 
     if (question.type === "multiple_choice_question") {
         for (const option of question.options) {
