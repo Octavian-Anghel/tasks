@@ -235,7 +235,25 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    const updatedQuestions = questions.map((question) => {
+        if (question.id === targetId) {
+            const updatedQuestion = {
+                ...question
+            };
+            if (targetOptionIndex === -1) {
+                updatedQuestion.options.push(newOption);
+            } else if (
+                targetOptionIndex >= 0 &&
+                targetOptionIndex < updatedQuestion.options.length
+            ) {
+                updatedQuestion.options[targetOptionIndex] = newOption;
+            }
+            return updatedQuestion;
+        } else {
+            return question;
+        }
+    });
+    return updatedQuestions;
 }
 
 /***
