@@ -164,8 +164,8 @@ export function addNewQuestion(
     type: QuestionType
 ): Question[] {
     const blankQuestion = makeBlankQuestion(id, name, type);
-    questions.push(blankQuestion);
-    return questions;
+    const updatedQuestions = [...questions, blankQuestion];
+    return updatedQuestions;
 }
 
 /***
