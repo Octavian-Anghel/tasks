@@ -80,7 +80,7 @@ export function sumPublishedPoints(questions: Question[]): number {
         }
         return accumulator;
     }, 0);
-    return 0;
+    return publishedSum;
 }
 
 /***
@@ -274,11 +274,14 @@ export function duplicateQuestionInArray(
     if (targetIndex === -1) {
         return questions;
     }
-    const updatedQuestions = questions.flatMap((question, index) =>
-        index === targetIndex
-            ? [question, duplicateQuestion(newId, question)]
-            : [question]
-    );
+    const targetQuestion = questions[targetIndex];
+    const duplicate = {
+        ...targetQuestion,
+        id: newId,
+        name: `Copy of ${targetQuestion.name}`
+    };
+    const updatedQuestions = [...questions];
+    updatedQuestions.splice(targetIndex + 1, 0, duplicate);
 
     return updatedQuestions;
 }
