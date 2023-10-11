@@ -12,8 +12,9 @@ export function d6(): number {
 }
 
 export function TwoDice(): JSX.Element {
-    const [leftDie, setLeftDie] = useState(d6());
-    const [rightDie, setRightDie] = useState(d6());
+    const [leftDie, setLeftDie] = useState(1);
+    const [rightDie, setRightDie] = useState(2);
+    const [gameResult, setGameResult] = useState<string | null>(null);
 
     const rollLeft = () => {
         const newValue = d6();
@@ -29,9 +30,11 @@ export function TwoDice(): JSX.Element {
 
     const checkGameResult = (leftValue: number, rightValue: number) => {
         if (leftValue === rightValue && leftValue === 1) {
-            alert("You lose!");
+            setGameResult("You lose!");
         } else if (leftValue === rightValue) {
-            alert("You win!");
+            setGameResult("You win!");
+        } else {
+            setGameResult(null); // Reset the game result
         }
     };
 
@@ -42,6 +45,7 @@ export function TwoDice(): JSX.Element {
             <br />
             <Button onClick={rollLeft}>Roll Left</Button>
             <Button onClick={rollRight}>Roll Right</Button>
+            {gameResult && <div data-testid="game-result">{gameResult}</div>}
         </div>
     );
 }
