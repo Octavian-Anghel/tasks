@@ -21,6 +21,7 @@ export function GiveAttempts(): JSX.Element {
         }
     };
 
+    // view
     return (
         <div>
             <h3>Give Attempts</h3>
