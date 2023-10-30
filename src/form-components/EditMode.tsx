@@ -5,13 +5,15 @@ export function EditMode(): JSX.Element {
     const [editMode, setEditMode] = useState(false);
     const [userName, setUserName] = useState("Your Name");
     const [isStudent, setIsStudent] = useState(true);
-    const switchRef = useRef(null);
+    const switchRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (switchRef.current) {
             const switchRoot = switchRef.current;
-            const inputParent = switchRoot.querySelector("input").parentNode;
-            inputParent.classList.add("form-switch");
+            const inputParent = switchRoot.querySelector("input")?.parentNode;
+            if (inputParent && inputParent instanceof HTMLElement) {
+                inputParent.classList.add("form-switch");
+            }
         }
     }, []);
 
