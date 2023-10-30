@@ -25,7 +25,7 @@ export function CheckAnswer({
                 onChange={handleChange}
                 placeholder="Enter your name"
             />
-            <div>Result: {userAnswer && (isCorrect ? "✔️" : "❌")}</div>
+            <div>Result: {isCorrect ? "✔️" : "❌"}</div>
         </div>
     );
 }

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Switch from "@mui/material/Switch";
 
 export function EditMode(): JSX.Element {
-    // state
     const [editMode, setEditMode] = useState(false);
     const [userName, setUserName] = useState("Your Name");
     const [isStudent, setIsStudent] = useState(true);
+    const switchRef = useRef(null);
 
-    // control
-    const handleModeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEditMode(e.target.checked);
+    useEffect(() => {
+        if (switchRef.current) {
+            const switchRoot = switchRef.current;
+            const inputParent = switchRoot.querySelector("input").parentNode;
+            inputParent.classList.add("form-switch");
+        }
+    }, []);
+
+    const handleModeChange = () => {
+        setEditMode(!editMode);
     };
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,17 +27,19 @@ export function EditMode(): JSX.Element {
         setIsStudent(e.target.checked);
     };
 
-    // view
     return (
         <div>
             <h3>Edit Mode</h3>
-            <Switch checked={editMode} onChange={handleModeChange} />
+            <div ref={switchRef}>
+                <Switch checked={editMode} onChange={handleModeChange} />
+            </div>
             {editMode ? (
                 <div>
                     <input
                         type="text"
                         value={userName}
                         onChange={handleNameChange}
+                        placeholder="Enter your name"
                     />
                     <label>
                         <input
