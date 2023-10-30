@@ -8,7 +8,6 @@ export function EditMode(): JSX.Element {
     const [isStudent, setIsStudent] = useState(true);
 
     // control
-
     const handleModeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditMode(e.target.checked);
     };
@@ -21,6 +20,7 @@ export function EditMode(): JSX.Element {
         setIsStudent(e.target.checked);
     };
 
+    // view
     return (
         <div>
             <h3>Edit Mode</h3>
